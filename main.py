@@ -7,8 +7,9 @@ import streamlit as st
 
 from database import sqlRequest
 
-from plots import display_plot_1, display_plot_2, display_plot_3
 from checks import check_database_connection
+from plots import display_turnover_per_months
+from test_plots import display_plot_1, display_plot_2, display_plot_3
 
 st.title("AdventureWorks dashboard")
 
@@ -21,3 +22,6 @@ check_database_connection()
 # display_plot_1()
 # display_plot_2()
 # display_plot_3()
+
+# Plots
+display_turnover_per_months()
