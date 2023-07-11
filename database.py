@@ -1,5 +1,6 @@
 import pyodbc
-from pandas import DataFrame
+
+# from pandas import DataFrame
 
 try:
     from utils import getConfig
@@ -8,7 +9,7 @@ except:
 
 
 server = "localhost"
-database = "AdventureWorks2019"
+database = "AdventureWorksDW2019"
 username = "SA"
 password = getConfig("PASSWORD")
 

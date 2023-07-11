@@ -17,6 +17,7 @@ st.title("AdventureWorks dashboard")
 check_database_connection()
 
 # Tests plots
+# Carefull=> sql query don't match with DW database
 # display_plot_1()
 # display_plot_2()
-display_plot_3()
+# display_plot_3()

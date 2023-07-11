@@ -9,5 +9,5 @@ def check_database_connection():
     st.text(version)
 
     st.title("Test database query")
-    test = sqlRequest("SELECT TOP (10) * FROM person.person;")
+    test = sqlRequest("SELECT TOP (10) * FROM DimCurrency;")
     st.text(test)
