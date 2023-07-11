@@ -10,8 +10,11 @@ from components.test_plots import display_plot_1, display_plot_2, display_plot_3
 # ------------------PAGE------------------------------------------
 st.title("AdventureWorks dashboard")
 
+checks_tab, plots_tab = st.tabs(["Checks", "Plots"])
+
 # Checks
-check_database_connection()
+with checks_tab:
+    check_database_connection()
 
 # Tests plots
 # Carefull=> sql query don't match with DW database
@@ -20,7 +23,8 @@ check_database_connection()
 # display_plot_3()
 
 # Plots
-display_turnover_per_year()
+with plots_tab:
+    display_turnover_per_year()
 
 # cursor.close()
 # cnxn.close()

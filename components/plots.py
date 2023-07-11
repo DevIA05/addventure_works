@@ -26,7 +26,7 @@ def display_turnover_per_year():
         + ".dbo.FactInternetSales \
         GROUP BY YEAR(OrderDate) ORDER by YearOfSale",
     )
-    st.text(turnover_data)
+    # st.text(turnover_data)
     y = []
     x = []
 
@@ -49,7 +49,7 @@ def display_turnover_per_year():
     fig = px.bar(
         df,
         range_y=[0, sorted_x_list[-1]],
-        title="Turnover per year",
+        title="",
         x="Year",
         y="Turnover",
         text_auto=True,
