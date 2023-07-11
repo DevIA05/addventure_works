@@ -3,6 +3,25 @@ import streamlit as st
 import pandas as pd
 from database import sqlRequest
 
+import plotly.graph_objects as go
+import plotly.express as px
+
+
+def display_bar_chart(x, y):
+    # Use textposition='auto' for direct text
+    fig = go.Figure(
+        data=[
+            go.Bar(
+                x=x,
+                y=y,
+                text=y,
+                textposition="auto",
+            )
+        ]
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
 
 def display_turnover_per_months():
     st.title("Turnover per months")
@@ -12,6 +31,19 @@ def display_turnover_per_months():
         FROM AdventureWorksDW2019.dbo.FactInternetSales \
         GROUP BY YEAR(OrderDate) ORDER by YearOfSale"
     )
-    df = pd.DataFrame(turnover_data)
     st.text(turnover_data)
-    print(df)
+    y = []
+    x = []
+
+    for elt in turnover_data:
+        # print(elt)
+        y.append(elt[1])
+        x.append(float(elt[0]))
+
+    print("x", x)
+    print("y", y)
+    df = pd.DataFrame(dict(x=y, y=x))
+    fig = px.line(df, x="x", y="y", title="Unsorted Input", range_y=[0, 1000])
+    # fig = px.bar(df, x="x", y="y", title="Unsorted Input")
+    st.plotly_chart(fig, use_container_width=True)
+    # print(df)
