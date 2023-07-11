@@ -50,8 +50,8 @@ def sqlRequest(cursor, sql):
 # )
 # print(df_test)
 
-# TO TEST IF WORKS
-# version = sqlRequest("SELECT @@version;")
+# # TO TEST IF WORKS
+# version = sqlRequest(cursor, "SELECT @@version;")
 # print(version)
 # test = sqlRequest("SELECT TOP (10) * FROM person.person;")
 # print(test)

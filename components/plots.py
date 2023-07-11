@@ -10,6 +10,8 @@ import plotly.express as px
 from database.utils import getConfig
 from database.database import cnxn
 
+# Autres graphs:
+
 
 def display_turnover_per_months():
     cursor = cnxn.cursor()
@@ -38,7 +40,7 @@ def display_turnover_per_months():
 
     # TODO: Mettre en place request sql pour récup valeur max pour la range_y
     fig = px.line(df, x="x", y="y", title="Unsorted Input", range_y=[0, 10000000])
-    # print(y.sort()[-1])
+    print(list(x).sort())
     st.plotly_chart(fig, use_container_width=True)
 
     cursor.close()
