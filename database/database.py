@@ -3,7 +3,7 @@ import pyodbc
 # from pandas import DataFrame
 
 try:
-    from utils import getConfig
+    from database.utils import getConfig
 except:
     from .utils import getConfig
 
@@ -12,11 +12,6 @@ server = getConfig("SERVER")
 database = getConfig("DATABASE")
 username = getConfig("USERNAME")
 password = getConfig("PASSWORD")
-
-# server = "adw2019.database.windows.net"
-# database = "DatabaseProjectAdventureWorksDW2019"
-# username = "admin-"
-# password = "#Adwork2019"
 
 cnxn = pyodbc.connect(
     "DRIVER={ODBC Driver 18 for SQL Server};SERVER="

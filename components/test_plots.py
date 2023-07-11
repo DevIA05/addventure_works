@@ -1,6 +1,8 @@
+# Dev tests
+
 import streamlit as st
 
-from database import sqlRequest
+from database.database import sqlRequest
 
 import pandas as pd
 

@@ -1,6 +1,8 @@
+# Active to test database connection in streamlit
+
 import streamlit as st
 
-from database import sqlRequest
+from database.database import sqlRequest
 
 
 def check_database_connection():
