@@ -63,7 +63,7 @@ def sqlRequest(sql):
 
 # turnover_data = sqlRequest(
 #     "SELECT SUM(UnitPrice) AS Sales , YEAR(OrderDate) as YearOfSale \
-#     FROM AdventureWorksDW2019.dbo.FactInternetSales \
+#     FROM "+getConfig("DATABASE")+".dbo.FactInternetSales \
 #     GROUP BY YEAR(OrderDate) ORDER by YearOfSale"
 # )
 # print(turnover_data)

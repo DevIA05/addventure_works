@@ -6,6 +6,8 @@ from database import sqlRequest
 import plotly.graph_objects as go
 import plotly.express as px
 
+from utils import getConfig
+
 
 def display_bar_chart(x, y):
     # Use textposition='auto' for direct text
@@ -28,7 +30,9 @@ def display_turnover_per_months():
 
     turnover_data = sqlRequest(
         "SELECT SUM(UnitPrice) AS Sales , YEAR(OrderDate) as YearOfSale \
-        FROM AdventureWorksDW2019.dbo.FactInternetSales \
+        FROM "
+        + getConfig("DATABASE")
+        + ".dbo.FactInternetSales \
         GROUP BY YEAR(OrderDate) ORDER by YearOfSale"
     )
     st.text(turnover_data)
@@ -43,7 +47,8 @@ def display_turnover_per_months():
     print("x", x)
     print("y", y)
     df = pd.DataFrame(dict(x=y, y=x))
-    fig = px.line(df, x="x", y="y", title="Unsorted Input", range_y=[0, 1000])
+    # Mettre en place request sql pour récup valeur max pour la range_y
+    fig = px.line(df, x="x", y="y", title="Unsorted Input", range_y=[0, 10000000])
     # fig = px.bar(df, x="x", y="y", title="Unsorted Input")
     st.plotly_chart(fig, use_container_width=True)
     # print(df)
