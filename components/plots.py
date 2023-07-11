@@ -2,6 +2,7 @@
 
 import streamlit as st
 
+import numpy as np
 import pandas as pd
 from database.database import sqlRequest
 
@@ -13,9 +14,9 @@ from database.database import cnxn
 # Autres graphs:
 
 
-def display_turnover_per_months():
+def display_turnover_per_year():
     cursor = cnxn.cursor()
-    st.title("Turnover per months")
+    st.title("Turnover per year")
 
     turnover_data = sqlRequest(
         cursor,
@@ -34,13 +35,25 @@ def display_turnover_per_months():
         y.append(elt[1])
         x.append(float(elt[0]))
 
-    # print("x", x)
-    # print("y", y)
+    # print("x", type(x[0]))
+    # print("y", y[0])
     df = pd.DataFrame(dict(x=y, y=x))
+    df.rename(columns={"x": "Year"}, inplace=True)
+    df.rename(columns={"y": "Turnover"}, inplace=True)
 
-    # TODO: Mettre en place request sql pour récup valeur max pour la range_y
-    fig = px.line(df, x="x", y="y", title="Unsorted Input", range_y=[0, 10000000])
-    print(list(x).sort())
+    sorted_x_array = np.sort(np.array(x))
+    sorted_x_list = sorted_x_array.tolist()
+    # fig = px.line(
+    #     df, x="x", y="y", title="Unsorted Input", range_y=[0, sorted_x_list[-1]]
+    # )
+    fig = px.bar(
+        df,
+        range_y=[0, sorted_x_list[-1]],
+        title="Turnover per year",
+        x="Year",
+        y="Turnover",
+        text_auto=True,
+    )
     st.plotly_chart(fig, use_container_width=True)
 
     cursor.close()

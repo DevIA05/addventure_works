@@ -3,7 +3,7 @@ import streamlit as st
 from database.database import sqlRequest, cnxn
 
 from components.checks import check_database_connection
-from components.plots import display_turnover_per_months
+from components.plots import display_turnover_per_year
 from components.test_plots import display_plot_1, display_plot_2, display_plot_3
 
 
@@ -20,7 +20,7 @@ check_database_connection()
 # display_plot_3()
 
 # Plots
-display_turnover_per_months()
+display_turnover_per_year()
 
 # cursor.close()
 # cnxn.close()
