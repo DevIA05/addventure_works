@@ -8,17 +8,20 @@ from database.database import sqlRequest
 import plotly.express as px
 
 from database.utils import getConfig
+from database.database import cnxn
 
 
 def display_turnover_per_months():
+    cursor = cnxn.cursor()
     st.title("Turnover per months")
 
     turnover_data = sqlRequest(
+        cursor,
         "SELECT SUM(UnitPrice) AS Sales , YEAR(OrderDate) as YearOfSale \
         FROM "
         + getConfig("DATABASE")
         + ".dbo.FactInternetSales \
-        GROUP BY YEAR(OrderDate) ORDER by YearOfSale"
+        GROUP BY YEAR(OrderDate) ORDER by YearOfSale",
     )
     st.text(turnover_data)
     y = []
@@ -35,4 +38,7 @@ def display_turnover_per_months():
 
     # TODO: Mettre en place request sql pour récup valeur max pour la range_y
     fig = px.line(df, x="x", y="y", title="Unsorted Input", range_y=[0, 10000000])
+    # print(y.sort()[-1])
     st.plotly_chart(fig, use_container_width=True)
+
+    cursor.close()

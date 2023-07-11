@@ -28,7 +28,7 @@ cnxn = pyodbc.connect(
 cursor = cnxn.cursor()
 
 
-def sqlRequest(sql):
+def sqlRequest(cursor, sql):
     cursor.execute(sql)
     rows = cursor.fetchall()
     # cursor.close() Where to close cursor ?

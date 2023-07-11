@@ -1,6 +1,6 @@
 import streamlit as st
 
-from database.database import sqlRequest
+from database.database import sqlRequest, cnxn
 
 from components.checks import check_database_connection
 from components.plots import display_turnover_per_months
@@ -21,3 +21,6 @@ check_database_connection()
 
 # Plots
 display_turnover_per_months()
+
+# cursor.close()
+# cnxn.close()

@@ -2,14 +2,17 @@
 
 import streamlit as st
 
-from database.database import sqlRequest
+from database.database import sqlRequest, cnxn
 
 
 def check_database_connection():
+    cursor = cnxn.cursor()
     st.title("Check if connection to database")
-    version = sqlRequest("SELECT @@version;")
+    version = sqlRequest(cursor, "SELECT @@version;")
     st.text(version)
 
     st.title("Test database query")
-    test = sqlRequest("SELECT TOP (10) * FROM DimCurrency;")
+    test = sqlRequest(cursor, "SELECT TOP (10) * FROM DimCurrency;")
     st.text(test)
+
+    cursor.close()
