@@ -1,4 +1,5 @@
 import pyodbc
+from pandas import DataFrame
 
 try:
     from utils import getConfig
@@ -28,10 +29,25 @@ cursor = cnxn.cursor()
 
 def sqlRequest(sql):
     cursor.execute(sql)
-    row = cursor.fetchall()
+    rows = cursor.fetchall()
     # cursor.close() Where to close cursor ?
-    return row
+    return rows
 
+
+# def sqlRequestDF(sql):
+#     cursor.execute(sql)
+#     df = DataFrame(cursor.fetchall())
+#     print(df.columns)
+#     df_pivot = df.pivot(columns="0")
+#     # df.columns = cursor.description
+#     # return df
+#     return df_pivot
+
+
+# df_test = sqlRequestDF(
+#     "SELECT COUNT(Gender) FROM HumanResources.Employee GROUP BY Gender ORDER BY Gender"
+# )
+# print(df_test)
 
 # TO TEST IF WORKS
 # version = sqlRequest("SELECT @@version;")
