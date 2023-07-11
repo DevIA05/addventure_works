@@ -7,17 +7,16 @@ import streamlit as st
 
 from database import sqlRequest
 
-from plots import display_plot_1
+from plots import display_plot_1, display_plot_2, display_plot_3
+from checks import check_database_connection
 
 st.title("AdventureWorks dashboard")
 
-st.title("Check if connection to database")
-version = sqlRequest("SELECT @@version;")
-st.text(version)
 
-st.title("Test database query")
-test = sqlRequest("SELECT TOP (10) * FROM person.person;")
-st.text(test)
+# Checks
+check_database_connection()
 
-display_plot_1()
-# st.plotly_chart
+# Tests plots
+# display_plot_1()
+# display_plot_2()
+display_plot_3()
