@@ -8,10 +8,15 @@ except:
     from .utils import getConfig
 
 
-server = "localhost"
-database = "AdventureWorksDW2019"
-username = "SA"
+server = getConfig("SERVER")
+database = getConfig("DATABASE")
+username = getConfig("USERNAME")
 password = getConfig("PASSWORD")
+
+# server = "adw2019.database.windows.net"
+# database = "DatabaseProjectAdventureWorksDW2019"
+# username = "admin-"
+# password = "#Adwork2019"
 
 cnxn = pyodbc.connect(
     "DRIVER={ODBC Driver 18 for SQL Server};SERVER="
@@ -55,3 +60,21 @@ def sqlRequest(sql):
 # print(version)
 # test = sqlRequest("SELECT TOP (10) * FROM person.person;")
 # print(test)
+
+# turnover_data = sqlRequest(
+#     "SELECT SUM(UnitPrice) AS Sales , YEAR(OrderDate) as YearOfSale \
+#     FROM AdventureWorksDW2019.dbo.FactInternetSales \
+#     GROUP BY YEAR(OrderDate) ORDER by YearOfSale"
+# )
+# print(turnover_data)
+
+# y = []
+# x = []
+
+# for elt in turnover_data:
+#     # print(elt)
+#     y.append(elt[1])
+#     x.append(float(elt[0]))
+
+# print("x", x)
+# print("y", y)
