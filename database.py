@@ -25,12 +25,16 @@ cnxn = pyodbc.connect(
 
 cursor = cnxn.cursor()
 
+
+def sqlRequest(sql):
+    cursor.execute(sql)
+    row = cursor.fetchall()
+    # cursor.close() Where to close cursor ?
+    return row
+
+
 # TO TEST IF WORKS
-# cursor.execute("SELECT @@version;")
-# row = cursor.fetchone()
-# while row:
-#     print(row[0])
-#     row = cursor.fetchone()
-# cursor.close()
-# cnxn.close()
-# print("done")
+# version = sqlRequest("SELECT @@version;")
+# print(version)
+# test = sqlRequest("SELECT TOP (10) * FROM person.person;")
+# print(test)
