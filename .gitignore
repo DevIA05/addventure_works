@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 note.md
 data
+ads_project
 # C extensions
 *.so
 
