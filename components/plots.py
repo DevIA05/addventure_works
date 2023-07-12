@@ -1,6 +1,5 @@
 # Contains chart to display
 
-# TODO: Replacer les cursor.close()
 import streamlit as st
 
 import numpy as np
