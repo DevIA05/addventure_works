@@ -14,10 +14,10 @@ except:
 # username = getConfig("USERNAME")
 # password = getConfig("PASSWORD")
 
-server = os.environ["SERVER"]
-database = os.environ["DATABASE"]
-username = os.environ["USERNAME"]
-password = os.environ["PASSWORD"]
+server = os.environ["DATABASE_SERVER"]
+database = os.environ["DATABASE_NAME"]
+username = os.environ["DATABASE_USERNAME"]
+password = os.environ["DATABASE_PASSWORD"]
 
 cnxn = pyodbc.connect(
     "DRIVER={ODBC Driver 18 for SQL Server};SERVER="
