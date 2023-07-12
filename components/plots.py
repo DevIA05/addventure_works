@@ -1,5 +1,6 @@
 # Contains chart to display
 
+import os
 import streamlit as st
 
 import numpy as np
@@ -22,7 +23,7 @@ def display_turnover_per_year():
         cursor,
         "SELECT SUM(UnitPrice) AS Sales , YEAR(OrderDate) as YearOfSale \
         FROM "
-        + getConfig("DATABASE")
+        + os.environ["DATABASE_NAME"]
         + ".dbo.FactInternetSales \
         GROUP BY YEAR(OrderDate) ORDER by YearOfSale",
     )
