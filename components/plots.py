@@ -1,6 +1,6 @@
 # Contains chart to display
 
-import os
+# TODO: Replacer les cursor.close()
 import streamlit as st
 
 import numpy as np
@@ -13,7 +13,8 @@ import plotly.graph_objects as go
 from database.utils import getConfig
 from database.database import cnxn, database
 
-# Autres graphs:
+from .utils import Geocoder
+import pydeck as pdk
 
 
 def display_turnover_per_year():
@@ -28,6 +29,7 @@ def display_turnover_per_year():
         + ".dbo.FactInternetSales \
         GROUP BY YEAR(OrderDate) ORDER by YearOfSale",
     )
+    cursor.close()
 
     y = []
     x = []
@@ -53,12 +55,10 @@ def display_turnover_per_year():
     )
     st.plotly_chart(fig, use_container_width=True)
 
-    cursor.close()
-
 
 def display_turnover_per_country():
     cursor = cnxn.cursor()
-    st.title("Turnover per country")
+    st.title("Turnover by country")
     returned_data = sqlRequest(
         cursor,
         "SELECT t.SalesTerritoryCountry, SUM(s.SalesAmount) AS TotalSalesAmount FROM "
@@ -68,6 +68,7 @@ def display_turnover_per_country():
             GROUP BY t.SalesTerritoryCountry\
             ORDER BY TotalSalesAmount DESC",
     )
+    cursor.close()
 
     # Créer une liste pour stocker les nouvelles lignes
     new_rows = []
@@ -92,4 +93,68 @@ def display_turnover_per_country():
 
     st.plotly_chart(fig, use_container_width=True)
 
+# MAP --------------------------------------------------------------------------
+def display_nbSale_per_country():
+    cursor = cnxn.cursor()
+    st.title("Quantité d'ordre passé dans le Pays")
+
+# Requête 
+# Table
+# o DimSalesTerritory
+# o FactInternetSales
+# - Somme le nombre de TotalQuantity par SalesTerritoryCountry
+# Car pour un même pays, il peut y avoir plusieurs TerritoryKey
+# Exemple: United State: 1 - Northwest
+#                        2 - Northest    
+# -- Récupère le nom de pays SalesTerritoryCountry en fonction du TerritoryKey
+# --- Somme le nombre de OrderQuantity (TotalQuantity) par TerritoryKey
+
+    sperc_data = sqlRequest(
+        cursor,
+        "SELECT SUM(nbSByC.TotalQuantity), nbSByC.SalesTerritoryCountry \
+        FROM ( "
+            "SELECT nbSByT.TotalQuantity, ST.SalesTerritoryCountry \
+            FROM ( \
+                SELECT SUM(OrderQuantity) as TotalQuantity , SalesTerritoryKey \
+                FROM "
+                + getConfig("DATABASE")
+                + ".dbo.FactInternetSales \
+                GROUP BY SalesTerritoryKey) as nbSByT," 
+            + getConfig("DATABASE")
+            + ".dbo.DimSalesTerritory as ST\
+            WHERE nbSByT.SalesTerritoryKey = ST.SalesTerritoryKey \
+            ) as nbSByC \
+        GROUP BY nbSByC.SalesTerritoryCountry"
+    )
     cursor.close()
+# Transformation de la liste de vecteur en dataframe
+    df = pd.DataFrame.from_records(sperc_data, columns=['TotalQuantity', 
+                                                        'SalesTerritoryCountry'])
+
+# Coordonnées
+    geocoder = Geocoder()
+    df[['latitude', 'longitude']] = df['SalesTerritoryCountry'].apply(
+        lambda x: pd.Series(geocoder.get_coordinates(x))
+    )
+
+# Rendu de la carte 
+    st.pydeck_chart(pdk.Deck(
+        map_style=None,
+        initial_view_state=pdk.ViewState(
+            latitude=df['latitude'].mean(),
+            longitude=df['longitude'].mean(),
+            zoom=0.5,
+            pitch=50,
+        ),
+        layers=[
+            pdk.Layer(
+                'ColumnLayer',
+                data=df,
+                get_position=['longitude', 'latitude'],
+                get_elevation='TotalQuantity',
+                elevation_scale=200,
+                radius=100000,
+                get_fill_color=[200, 30, 0, 160],
+            ),
+        ],
+    ))

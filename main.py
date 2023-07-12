@@ -1,7 +1,8 @@
 import streamlit as st
 
 from components.checks import check_database_connection
-from components.plots import display_turnover_per_country, display_turnover_per_year
+from components.plots import display_turnover_per_country, display_turnover_per_year, \
+    display_nbSale_per_country
 
 
 # Initial page config
@@ -28,3 +29,4 @@ with plots_tab:
         display_turnover_per_year()
     with col2:
         display_turnover_per_country()
+    display_nbSale_per_country()
