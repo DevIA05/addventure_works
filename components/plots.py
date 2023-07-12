@@ -8,9 +8,10 @@ import pandas as pd
 from database.database import sqlRequest
 
 import plotly.express as px
+import plotly.graph_objects as go
 
 from database.utils import getConfig
-from database.database import cnxn
+from database.database import cnxn, database
 
 # Autres graphs:
 
@@ -23,7 +24,7 @@ def display_turnover_per_year():
         cursor,
         "SELECT SUM(UnitPrice) AS Sales , YEAR(OrderDate) as YearOfSale \
         FROM "
-        + os.environ["DATABASE_NAME"]
+        + database
         + ".dbo.FactInternetSales \
         GROUP BY YEAR(OrderDate) ORDER by YearOfSale",
     )
@@ -55,6 +56,44 @@ def display_turnover_per_year():
         y="Turnover",
         text_auto=True,
     )
+    st.plotly_chart(fig, use_container_width=True)
+
+    cursor.close()
+
+def display_turnover_per_country():
+    cursor = cnxn.cursor()
+    st.title("Turnover per country")
+    returned_data = sqlRequest(
+        cursor,
+        "SELECT t.SalesTerritoryCountry, SUM(s.SalesAmount) AS TotalSalesAmount FROM "
+        + database
+        + ".dbo.DimSalesTerritory t \
+            JOIN FactInternetSales s ON t.SalesTerritoryKey = s.SalesTerritoryKey \
+            GROUP BY t.SalesTerritoryCountry\
+            ORDER BY TotalSalesAmount DESC",
+    )
+
+    # Créer une liste pour stocker les nouvelles lignes
+    new_rows = []
+
+    # Parcourir les données retournées
+    for e in returned_data:
+        country = e[0]
+        turnover = e[1]
+
+        # Ajouter une nouvelle ligne à la liste
+        new_rows.append({'country': country, 'turnover': turnover})
+
+    # Ajouter les nouvelles lignes au DataFrame
+    df = pd.DataFrame(new_rows)
+
+    # Créer les données pour le diagramme en secteurs
+    labels = df['country']
+    values = df['turnover']
+
+    # Créer l'objet Pie chart
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+
     st.plotly_chart(fig, use_container_width=True)
 
     cursor.close()
