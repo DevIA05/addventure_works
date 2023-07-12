@@ -116,10 +116,10 @@ def display_nbSale_per_country():
             FROM ( \
                 SELECT SUM(OrderQuantity) as TotalQuantity , SalesTerritoryKey \
                 FROM "
-                + getConfig("DATABASE")
+                + database
                 + ".dbo.FactInternetSales \
                 GROUP BY SalesTerritoryKey) as nbSByT," 
-            + getConfig("DATABASE")
+            + database
             + ".dbo.DimSalesTerritory as ST\
             WHERE nbSByT.SalesTerritoryKey = ST.SalesTerritoryKey \
             ) as nbSByC \
