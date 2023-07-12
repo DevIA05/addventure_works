@@ -29,4 +29,5 @@ with plots_tab:
         display_turnover_per_year()
     with col2:
         display_turnover_per_country()
+    # TODO: Add spinner
     display_nbSale_per_country()
