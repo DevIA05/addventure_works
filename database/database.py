@@ -1,4 +1,5 @@
 import pyodbc
+import os
 
 # from pandas import DataFrame
 
@@ -8,10 +9,15 @@ except:
     from .utils import getConfig
 
 
-server = getConfig("SERVER")
-database = getConfig("DATABASE")
-username = getConfig("USERNAME")
-password = getConfig("PASSWORD")
+# server = getConfig("SERVER")
+# database = getConfig("DATABASE")
+# username = getConfig("USERNAME")
+# password = getConfig("PASSWORD")
+
+server = os.environ["SERVER"]
+database = os.environ["DATABASE"]
+username = os.environ["USERNAME"]
+password = os.environ["PASSWORD"]
 
 cnxn = pyodbc.connect(
     "DRIVER={ODBC Driver 18 for SQL Server};SERVER="
