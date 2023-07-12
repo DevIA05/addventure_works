@@ -11,7 +11,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 from database.utils import getConfig
-from database.database import cnxn
+from database.database import cnxn, database
 
 # Autres graphs:
 
@@ -24,7 +24,7 @@ def display_turnover_per_year():
         cursor,
         "SELECT SUM(UnitPrice) AS Sales , YEAR(OrderDate) as YearOfSale \
         FROM "
-        + os.environ["DATABASE_NAME"]
+        + database
         + ".dbo.FactInternetSales \
         GROUP BY YEAR(OrderDate) ORDER by YearOfSale",
     )
@@ -66,7 +66,7 @@ def display_turnover_per_country():
     returned_data = sqlRequest(
         cursor,
         "SELECT t.SalesTerritoryCountry, SUM(s.SalesAmount) AS TotalSalesAmount FROM "
-        + getConfig("DATABASE") 
+        + database
         + ".dbo.DimSalesTerritory t \
             JOIN FactInternetSales s ON t.SalesTerritoryKey = s.SalesTerritoryKey \
             GROUP BY t.SalesTerritoryCountry\
