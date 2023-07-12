@@ -17,9 +17,6 @@ from .utils import Geocoder
 import pydeck as pdk
 
 
-# Autres graphs:
-
-
 def display_turnover_per_year():
     cursor = cnxn.cursor()
     st.title("Turnover per year")
@@ -131,21 +128,17 @@ def display_nbSale_per_country():
         GROUP BY nbSByC.SalesTerritoryCountry"
     )
     cursor.close()
-# Transformation de la liste de vecteur en dataframe    
-    # print(sperc_data)
+# Transformation de la liste de vecteur en dataframe
     df = pd.DataFrame.from_records(sperc_data, columns=['TotalQuantity', 
                                                         'SalesTerritoryCountry'])
-    # print(df)
 
 # Coordonnées
     geocoder = Geocoder()
     df[['latitude', 'longitude']] = df['SalesTerritoryCountry'].apply(
         lambda x: pd.Series(geocoder.get_coordinates(x))
     )
-    # print(df)
 
 # Rendu de la carte 
-    # max = df['TotalQuantity'].max()
     st.pydeck_chart(pdk.Deck(
         map_style=None,
         initial_view_state=pdk.ViewState(
@@ -163,16 +156,6 @@ def display_nbSale_per_country():
                 elevation_scale=200,
                 radius=100000,
                 get_fill_color=[200, 30, 0, 160],
-                #get_fill_color=lambda row: geocoder.get_color(row, max),
             ),
-            # pdk.Layer(
-            #     'TextLayer',
-            #     data=df,
-            #     get_position=['longitude', 'latitude'],
-            #     get_text='TotalQuantity',
-            #     get_color=[0, 0, 0],
-            #     get_size=250,
-            #     get_alignment_baseline="'bottom'",
-            # )
         ],
     ))
