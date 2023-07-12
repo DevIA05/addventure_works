@@ -20,7 +20,7 @@ except:
     password = getConfig("PASSWORD")
 
 cnxn = pyodbc.connect(
-    "DRIVER={ODBC Driver 18 for SQL Server};SERVER="
+    "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
     + server
     + ";DATABASE="
     + database
