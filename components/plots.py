@@ -18,7 +18,7 @@ import pydeck as pdk
 
 def display_turnover_per_year():
     cursor = cnxn.cursor()
-    st.title("Turnover per year")
+    st.title("Chiffre d'affaires par an")
 
     turnover_data = sqlRequest(
         cursor,
@@ -57,7 +57,7 @@ def display_turnover_per_year():
 
 def display_turnover_per_country():
     cursor = cnxn.cursor()
-    st.title("Turnover by country")
+    st.title("Chiffre d'affaires par pays")
     returned_data = sqlRequest(
         cursor,
         "SELECT t.SalesTerritoryCountry, SUM(s.SalesAmount) AS TotalSalesAmount FROM "
