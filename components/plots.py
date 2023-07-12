@@ -29,6 +29,7 @@ def display_turnover_per_year():
         + ".dbo.FactInternetSales \
         GROUP BY YEAR(OrderDate) ORDER by YearOfSale",
     )
+    cursor.close()
 
     y = []
     x = []
@@ -54,12 +55,10 @@ def display_turnover_per_year():
     )
     st.plotly_chart(fig, use_container_width=True)
 
-    cursor.close()
-
 
 def display_turnover_per_country():
     cursor = cnxn.cursor()
-    st.title("Turnover per country")
+    st.title("Turnover by country")
     returned_data = sqlRequest(
         cursor,
         "SELECT t.SalesTerritoryCountry, SUM(s.SalesAmount) AS TotalSalesAmount FROM "
@@ -69,6 +68,7 @@ def display_turnover_per_country():
             GROUP BY t.SalesTerritoryCountry\
             ORDER BY TotalSalesAmount DESC",
     )
+    cursor.close()
 
     # Créer une liste pour stocker les nouvelles lignes
     new_rows = []
@@ -93,7 +93,6 @@ def display_turnover_per_country():
 
     st.plotly_chart(fig, use_container_width=True)
 
-    cursor.close()
 # MAP --------------------------------------------------------------------------
 def display_nbSale_per_country():
     cursor = cnxn.cursor()
