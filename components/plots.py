@@ -142,7 +142,7 @@ def display_nbSale_per_country():
     df[['latitude', 'longitude']] = df['SalesTerritoryCountry'].apply(
         lambda x: pd.Series(geocoder.get_coordinates(x))
     )
-    print(df)
+    # print(df)
 
 # Rendu de la carte 
     # max = df['TotalQuantity'].max()
