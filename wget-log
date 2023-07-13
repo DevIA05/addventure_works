@@ -1,17 +1,0 @@
---2023-07-13 15:42:23--  https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorksDW2019.bak
-Certificat de l’autorité de certification « /etc/ssl/certs/ca-certificates.crt » chargé
-Résolution de github.com (github.com)… 140.82.121.3
-Connexion à github.com (github.com)|140.82.121.3|:443… connecté.
-requête HTTP transmise, en attente de la réponse… 302 Found
-Emplacement : https://objects.githubusercontent.com/github-production-release-asset-2e65be/53698446/edb861e5-3063-48c5-bf59-b9433479d540?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230713%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230713T114225Z&X-Amz-Expires=300&X-Amz-Signature=cf469ed5c7886b704ec597fca96f6bc286616f506cecfae5d2f4d168ed22cc56&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=53698446&response-content-disposition=attachment%3B%20filename%3DAdventureWorksDW2019.bak&response-content-type=application%2Foctet-stream [suivant]
---2023-07-13 15:42:25--  https://objects.githubusercontent.com/github-production-release-asset-2e65be/53698446/edb861e5-3063-48c5-bf59-b9433479d540?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230713%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230713T114225Z&X-Amz-Expires=300&X-Amz-Signature=cf469ed5c7886b704ec597fca96f6bc286616f506cecfae5d2f4d168ed22cc56&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=53698446&response-content-disposition=attachment%3B%20filename%3DAdventureWorksDW2019.bak&response-content-type=application%2Foctet-stream
-Résolution de objects.githubusercontent.com (objects.githubusercontent.com)… 185.199.110.133, 185.199.109.133, 185.199.108.133, ...
-Connexion à objects.githubusercontent.com (objects.githubusercontent.com)|185.199.110.133|:443… connecté.
-requête HTTP transmise, en attente de la réponse… 200 OK
-Taille : 101834752 (97M) [application/octet-stream]
-Sauvegarde en : « AdventureWorksDW2019.bak »
-
-AdventureWorksDW2019.bak                             95%[============================================================================================================>      ]  92,32M  7,80MB/s    tps 3s     AdventureWorksDW2019.bak                             97%[===============================================================================================================>   ]  94,60M  8,13MB/s    tps 3s     AdventureWorksDW2019.bak                            100%[==================================================================================================================>]  97,12M  8,50MB/s    ds 22s     
-
-2023-07-13 15:42:48 (4,39 MB/s) — « AdventureWorksDW2019.bak » sauvegardé [101834752/101834752]
-

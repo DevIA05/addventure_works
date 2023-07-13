@@ -1,4 +1,10 @@
 # https://www.baeldung.com/ops/docker-compose-communication
+
+# TODO: From link above, apply change in this file to not use 
+# the command docker network create network-example
+
+# TODO: Rename le network
+
 # Before, type: docker network create network-example
 
 version: '3'
