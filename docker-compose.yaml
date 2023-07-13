@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  myapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - 8501:8501
+    # environment:
+    #   - DATABASE_SERVER=20.8.142.57
+    #   - DATABASE_NAME=AdventureWorksDW2019
+    #   - DATABASE_USERNAME=SA
+    #   - DATABASE_PASSWORD=yourStrong_Password
+
+
