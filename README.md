@@ -2,7 +2,7 @@
 
 - create venv
 - install `requirements.txt`
-  To .venv/bin/activate add:
+  in root directory add ".env" file which contains:
 
 ```
 export DATABASE_SERVER=...

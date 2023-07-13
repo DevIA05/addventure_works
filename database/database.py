@@ -1,5 +1,7 @@
 import pyodbc
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 server = os.environ["DATABASE_SERVER"]
 database = os.environ["DATABASE_NAME"]
