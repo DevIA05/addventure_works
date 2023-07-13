@@ -1,3 +1,6 @@
+# https://www.baeldung.com/ops/docker-compose-communication
+# Before, type: docker network create network-example
+
 version: '3'
 
 services:
@@ -9,10 +12,29 @@ services:
       - .:/app
     ports:
       - 8501:8501
+    
     environment:
-      - DATABASE_SERVER=20.8.142.57
-      - DATABASE_NAME=AdventureWorksDW2019
+      - DATABASE_SERVER=sql3
+      - DATABASE_NAME=sys
       - DATABASE_USERNAME=SA
-      - DATABASE_PASSWORD=yourStrong_Password
+      - DATABASE_PASSWORD=Thomaseric_97480
+    networks:
+      - external-example
+
+  sql3:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Thomaseric_97480
+    container_name: sql3
+    hostname: sql3
+    ports:
+      - 1433:1433
+    networks:
+      - external-example
+  
 
 
+networks:
+  external-example:
+    external: true
