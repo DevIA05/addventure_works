@@ -1,16 +1,14 @@
 # https://www.baeldung.com/ops/docker-compose-communication
 
 # TODO: From link above, apply change in this file to not use 
-# the command docker network create network-example
+# the command docker network create AdventureWorksDashboardNetwork
 
-# TODO: Rename le network
-
-# Before, type: docker network create network-example
+# Before, type: docker network create AdventureWorksDashboardNetwork
 
 version: '3'
 
 services:
-  myapp:
+  adventure_works_dashboard_dev:
     build:
       context: .
       dockerfile: Dockerfile
@@ -20,27 +18,27 @@ services:
       - 8501:8501
     
     environment:
-      - DATABASE_SERVER=sql3
+      - DATABASE_SERVER=AdventureWorksDashboardSQLServer
       - DATABASE_NAME=AdventureWorksDW2019
       - DATABASE_USERNAME=SA
-      - DATABASE_PASSWORD=Thomaseric_97480
+      - DATABASE_PASSWORD=my_ShittyPassword123
     networks:
-      - external-example
+      - AdventureWorksDashboardNetwork
 
-  sql3:
+  AdventureWorksDashboardSQLServer:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=Thomaseric_97480
-    container_name: sql3
-    hostname: sql3
+      - MSSQL_SA_PASSWORD=my_ShittyPassword123
+    container_name: AdventureWorksDashboardSQLServer
+    hostname: AdventureWorksDashboardSQLServer
     ports:
       - 1433:1433
     networks:
-      - external-example
+      - AdventureWorksDashboardNetwork
   
 
 
 networks:
-  external-example:
+  AdventureWorksDashboardNetwork:
     external: true

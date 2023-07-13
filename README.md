@@ -1,14 +1,9 @@
-# To use localhost
+# To run localhost
 
-- create venv
-- install `requirements.txt`
-  in root directory add ".env" file which contains:
+```sh
+docker-compose up -d
 
-```
-export DATABASE_SERVER=...
-export DATABASE_NAME=...
-export DATABASE_USERNAME=...
-export DATABASE_PASSWORD=...
+./restore-db
 ```
 
 ## Launch locally
