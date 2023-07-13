@@ -1,7 +1,5 @@
 import pyodbc
 import os
-from dotenv import load_dotenv
-load_dotenv()
 
 server = os.environ["DATABASE_SERVER"]
 database = os.environ["DATABASE_NAME"]
@@ -21,6 +19,10 @@ cnxn = pyodbc.connect(
 )
 
 cursor = cnxn.cursor()
+
+# TODO: pyodbc.Error: ('HY000', '[HY000] [Microsoft][ODBC Driver 18 for SQL Server]
+# Connection is busy with results for another command (0) (SQLExecDirectW)')
+# => close connection each time !
 
 
 def sqlRequest(cursor, sql):

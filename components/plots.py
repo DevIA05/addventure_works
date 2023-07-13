@@ -94,7 +94,7 @@ def display_turnover_per_country():
 # MAP --------------------------------------------------------------------------
 def display_nbSale_per_country():
     cursor = cnxn.cursor()
-    st.header("Commandes passé par Pays")
+    st.header("Commandes passées par Pays")
 
 # Requête 
 # Table
