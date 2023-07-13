@@ -2,12 +2,13 @@
 
 - create venv
 - install `requirements.txt`
-  To pyvenv.cfg add:
+  To .venv/bin/activate add:
 
 ```
-[venv]
-
-PASSWORD=<yourLocallSQLServerUserPassword>
+export DATABASE_SERVER=...
+export DATABASE_NAME=...
+export DATABASE_USERNAME=...
+export DATABASE_PASSWORD=...
 ```
 
 ## Launch locally

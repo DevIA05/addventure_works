@@ -1,23 +1,10 @@
 import pyodbc
 import os
 
-# TODO Fix 
-try:
-    from database.utils import getConfig
-except:
-    from .utils import getConfig
-# TODO Fix 
-try:
-    server = os.environ["DATABASE_SERVER"]
-    database = os.environ["DATABASE_NAME"]
-    username = os.environ["DATABASE_USERNAME"]
-    password = os.environ["DATABASE_PASSWORD"]
-except:
-
-    server = getConfig("SERVER")
-    database = getConfig("DATABASE")
-    username = getConfig("USERNAME")
-    password = getConfig("PASSWORD")
+server = os.environ["DATABASE_SERVER"]
+database = os.environ["DATABASE_NAME"]
+username = os.environ["DATABASE_USERNAME"]
+password = os.environ["DATABASE_PASSWORD"]
 
 cnxn = pyodbc.connect(
     "DRIVER={ODBC Driver 18 for SQL Server};SERVER="

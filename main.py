@@ -19,6 +19,7 @@ with cola2:
 # Checks
 # check_database_connection()
 
+# TODO: Utiliser les "title" des graphs
 
 # Plots
 # Créer une mise en page à deux colonnes
