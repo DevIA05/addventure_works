@@ -9,7 +9,6 @@ from database.database import sqlRequest
 import plotly.express as px
 import plotly.graph_objects as go
 
-from database.utils import getConfig
 from database.database import cnxn, database
 
 from .utils import Geocoder
@@ -18,7 +17,7 @@ import pydeck as pdk
 
 def display_turnover_per_year():
     cursor = cnxn.cursor()
-    st.title("Chiffre d'affaires par an")
+    st.header("Chiffre d'affaires par an")
 
     turnover_data = sqlRequest(
         cursor,
@@ -57,7 +56,7 @@ def display_turnover_per_year():
 
 def display_turnover_per_country():
     cursor = cnxn.cursor()
-    st.title("Chiffre d'affaires par pays")
+    st.header("Chiffre d'affaires par pays")
     returned_data = sqlRequest(
         cursor,
         "SELECT t.SalesTerritoryCountry, SUM(s.SalesAmount) AS TotalSalesAmount FROM "
@@ -95,7 +94,7 @@ def display_turnover_per_country():
 # MAP --------------------------------------------------------------------------
 def display_nbSale_per_country():
     cursor = cnxn.cursor()
-    st.title("Quantité d'ordre passé dans le Pays")
+    st.header("Commandes passé par Pays")
 
 # Requête 
 # Table

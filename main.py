@@ -12,8 +12,9 @@ st.set_page_config(
 )
 
 # ------------------PAGE------------------------------------------
-# TODO: Centrer l'element
-st.title("AdventureWorks dashboard")
+cola1, cola2, cola3 = st.columns(3)
+with cola2:
+    st.title("AdventureWorks dashboard")
 
 # Checks
 # check_database_connection()
