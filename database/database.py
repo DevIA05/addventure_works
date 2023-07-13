@@ -22,6 +22,10 @@ cnxn = pyodbc.connect(
 
 cursor = cnxn.cursor()
 
+# TODO: pyodbc.Error: ('HY000', '[HY000] [Microsoft][ODBC Driver 18 for SQL Server]
+# Connection is busy with results for another command (0) (SQLExecDirectW)')
+# => close connection each time !
+
 
 def sqlRequest(cursor, sql):
     cursor.execute(sql)

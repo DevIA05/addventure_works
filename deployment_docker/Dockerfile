@@ -26,10 +26,7 @@ RUN exit
 RUN apt-get -y update
 RUN ACCEPT_EULA=Y apt-get install -y msodbcsql18
 
-# RUN git clone https://github.com/DevIA05/addventure_works.git .
-COPY . /app
-
-VOLUME /app
+RUN git clone https://github.com/DevIA05/addventure_works.git .
 
 RUN pip3 install -r requirements.txt
 
