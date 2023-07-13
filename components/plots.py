@@ -88,7 +88,7 @@ def display_turnover_per_country():
 
     # Créer l'objet Pie chart
     fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
-
+    
     st.plotly_chart(fig, use_container_width=True)
 
 # MAP --------------------------------------------------------------------------
@@ -135,7 +135,7 @@ def display_nbSale_per_country():
         lambda x: pd.Series(geocoder.get_coordinates(x))
     )
 
-# Rendu de la carte 
+    # Rendu de la carte 
     st.pydeck_chart(pdk.Deck(
         map_style=None,
         initial_view_state=pdk.ViewState(
@@ -151,7 +151,11 @@ def display_nbSale_per_country():
                 get_position=['longitude', 'latitude'],
                 get_elevation='TotalQuantity',
                 elevation_scale=200,
-                radius=100000,
+                stroked=False,
+                filled=True,
+                extruded=True,
+                wireframe=True,
+                radius=300000,
                 get_fill_color=[200, 30, 0, 160],
             ),
         ],

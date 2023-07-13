@@ -25,8 +25,12 @@ with cola2:
 # Créer une mise en page à deux colonnes
 col1, col2 = st.columns(2)
 with col1:
-    display_turnover_per_year()
+    if st.checkbox('Afficher le graphique 1', value=True):
+        display_turnover_per_year()
 with col2:
-    display_turnover_per_country()
+    if st.checkbox('Afficher le graphique 2', value=True):
+        display_turnover_per_country()
 # TODO: Add spinner
-display_nbSale_per_country()
+
+if st.checkbox('Afficher le graphique 3', value=True):
+    display_nbSale_per_country()
