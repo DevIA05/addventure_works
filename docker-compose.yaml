@@ -15,7 +15,7 @@ services:
     
     environment:
       - DATABASE_SERVER=sql3
-      - DATABASE_NAME=sys
+      - DATABASE_NAME=AdventureWorksDW2019
       - DATABASE_USERNAME=SA
       - DATABASE_PASSWORD=Thomaseric_97480
     networks:
