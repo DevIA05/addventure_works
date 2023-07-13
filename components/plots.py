@@ -9,7 +9,6 @@ from database.database import sqlRequest
 import plotly.express as px
 import plotly.graph_objects as go
 
-from database.utils import getConfig
 from database.database import cnxn, database
 
 from .utils import Geocoder
@@ -95,7 +94,7 @@ def display_turnover_per_country():
 # MAP --------------------------------------------------------------------------
 def display_nbSale_per_country():
     cursor = cnxn.cursor()
-    st.header("Quantité d'ordre passé dans le Pays")
+    st.header("Commandes passé par Pays")
 
 # Requête 
 # Table
