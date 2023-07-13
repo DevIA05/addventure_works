@@ -1,15 +1,3 @@
 #bin/bash
 
-# docker exec -u 0 -it sql3 bash -c "apt-get update && cd /var/opt/mssql/data && wget -O AdventureWorksDW2019.bak https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorksDW2019.bak"
-# docker exec -u 0 -it sql3 bash -c "/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P my_ShittyPassword123 -Q 'CREATE DATABASE AdventureWorksDW2019;RESTORE DATABASE AdventureWorksDW2019 FROM DISK = 'AdventureWorksDW2019.bak' WITH MOVE 'AdventureWorksDW2019' TO '/var/opt/mssql/data/AdventureWorksDW2019.mdf', MOVE 'AdventureWorksDW2019_log' TO '/var/opt/mssql/data/AdventureWorksDW2019_log.ldf',REPLACE'"
-# /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P my_ShittyPassword123
-
-# CREATE DATABASE AdventureWorksDW2019
-
-# RESTORE DATABASE AdventureWorksDW2019 FROM DISK = 'AdventureWorksDW2019.bak' WITH MOVE 'AdventureWorksDW2019' TO '/var/opt/mssql/data/AdventureWorksDW2019.mdf', MOVE 'AdventureWorksDW2019_log' TO '/var/opt/mssql/data/AdventureWorksDW2019_log.ldf',REPLACE
-
-# echo done
-
-# docker exec -u 0 -it sql3 bash -c "apt-get update && cd /var/opt/mssql/data && wget -O AdventureWorksDW2019.bak https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorksDW2019.bak && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P my_ShittyPassword123 -Q 'CREATE DATABASE AdventureWorksDW2019' -Q 'RESTORE DATABASE AdventureWorksDW2019 FROM DISK = "AdventureWorksDW2019.bak" WITH MOVE "AdventureWorksDW2019" TO "/var/opt/mssql/data/AdventureWorksDW2019.mdf", MOVE "AdventureWorksDW2019_log" TO "/var/opt/mssql/data/AdventureWorksDW2019_log.ldf",REPLACE;'"
-
 docker exec -u 0 -it AdventureWorksDashboardSQLServer bash -c "apt-get update && cd /var/opt/mssql/data && wget -O AdventureWorksDW2019.bak https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorksDW2019.bak && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P my_ShittyPassword123 -Q 'CREATE DATABASE AdventureWorksDW2019;RESTORE DATABASE AdventureWorksDW2019 FROM DISK = \"AdventureWorksDW2019.bak\" WITH MOVE \"AdventureWorksDW2019\" TO \"/var/opt/mssql/data/AdventureWorksDW2019.mdf\", MOVE \"AdventureWorksDW2019_log\" TO \"/var/opt/mssql/data/AdventureWorksDW2019_log.ldf\",REPLACE;'"

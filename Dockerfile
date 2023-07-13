@@ -1,5 +1,3 @@
-# app/Dockerfile
-
 FROM python:3.9-slim
 
 WORKDIR /app
@@ -26,7 +24,6 @@ RUN exit
 RUN apt-get -y update
 RUN ACCEPT_EULA=Y apt-get install -y msodbcsql18
 
-# RUN git clone https://github.com/DevIA05/addventure_works.git .
 COPY . /app
 
 VOLUME /app
