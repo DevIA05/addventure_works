@@ -37,8 +37,11 @@ services:
     networks:
       - AdventureWorksDashboardNetwork
   
-
-
 networks:
   AdventureWorksDashboardNetwork:
-    external: true
+    driver: bridge
+
+# networks:
+#   AdventureWorksDashboardNetwork:
+#     external: true
+
